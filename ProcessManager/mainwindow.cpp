@@ -653,11 +653,11 @@ void QtTaskManager::on_denyUserButton_clicked()
 {
     LPTSTR Trustee = TEXT("TestUser");
     if(bDenyUser){
-        AddAceToObjectsSecurityDescriptor(const_cast<LPTSTR>(FILEPATH), SE_FILE_OBJECT, Trustee, TRUSTEE_IS_NAME, FILE_GENERIC_READ, DENY_ACCESS, OBJECT_INHERIT_ACE | CONTAINER_INHERIT_ACE);
+        AddAceToObjectsSecurityDescriptor(const_cast<LPTSTR>(FILEPATH), SE_FILE_OBJECT, Trustee, TRUSTEE_IS_NAME, FILE_GENERIC_READ | FILE_GENERIC_WRITE | FILE_GENERIC_EXECUTE, DENY_ACCESS, NULL);
         ui.denyUserButton->setText("Allow Access");
     }
     else{
-        AddAceToObjectsSecurityDescriptor(const_cast<LPTSTR>(FILEPATH), SE_FILE_OBJECT, Trustee, TRUSTEE_IS_NAME, FILE_GENERIC_READ, GRANT_ACCESS, OBJECT_INHERIT_ACE | CONTAINER_INHERIT_ACE);
+        AddAceToObjectsSecurityDescriptor(const_cast<LPTSTR>(FILEPATH), SE_FILE_OBJECT, Trustee, TRUSTEE_IS_NAME, FILE_GENERIC_READ | FILE_GENERIC_WRITE | FILE_GENERIC_EXECUTE, GRANT_ACCESS, NULL);
         ui.denyUserButton->setText("Deny Access");
     }
     bDenyUser = !bDenyUser;
